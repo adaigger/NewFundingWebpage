@@ -130,6 +130,28 @@ public void LogoutCPAlt() throws InterruptedException {
         
    }
     
+ // Used for certain accounts that require user to choose an account after login
+    public boolean OptionsLoginValueMultAccount(WebElement button, String type, String user, String pass) throws InterruptedException { 
+   	 System.out.println("--------Checking " + type+ " --------");
+        button.click();
+        Thread.sleep(1000);
+        //click the Log In button in modal
+        driver.findElement(By.xpath("/html/body/am-modal/div/div/div/div[3]/div/div[2]/div/p/am-button/a")).click();
+        Thread.sleep(1000);
+        
+        driver.findElement(By.xpath("//*[@id=\"user_name\"]")).sendKeys(user);
+        driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(pass);
+        driver.findElement(By.xpath("//*[@id=\"submitForm\"]")).click();
+ 
+        Thread.sleep(4000);
+        // Choose the org acount and click continue
+        driver.findElement(By.xpath("/html/body/am-picker/div/div/div/am-item-manipulator/picker-account-data/div/div[2]/div/div[1]/table/tbody[1]/tr/td[2]/picker-entry-icon/i")).click();
+        driver.findElement(By.xpath("/html/body/am-picker/div/div/div/am-item-manipulator/picker-account-data/div/div[2]/div/div[2]/am-button[2]/a")).click();
+        Thread.sleep(4000);
+        return Utils.getCPPositionsHeaderAlt(driver).getText().contains(type);
+        
+   }
+    
     public boolean OptionsLoginValueNegative(WebElement button, String user, String pass) throws InterruptedException { 
     	 System.out.println("--------Checking for Negative Test --------");
          button.click();
@@ -1359,7 +1381,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("Canada", "Canadian Dollar (CAD)");
 		//Choose Method and login
-				if(OptionsLoginValue(Utils.getChoice1(driver), "Connect Your Bank via EFT Deposit", "fdcan514", "canada22" ) == false){
+				if(OptionsLoginValueMultAccount(Utils.getChoice2(driver), "Transfer Funds", "fdcan514", "canada22" ) == false){
 		            System.out.println("EFT Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "EFT redirect is not working");
 		            Thread.sleep(3000);
@@ -1428,7 +1450,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("Hong Kong Special Administrative Region of China", "Hong Kong Dollar (HKD)");
 		//Choose Method and login
-				if(OptionsLoginValueAlt(Utils.getChoice1(driver), "Instant Local Transfer via FPS Deposit", "fancy1003", "tester12" ) == false){
+				if(OptionsLoginValueMultAccount(Utils.getChoice1(driver), "Instant Local Transfer via FPS Deposit", "fancy1003", "tester12" ) == false){
 		            System.out.println("FPS Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "FPS redirect is not working");
 		            Thread.sleep(3000);
