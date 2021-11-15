@@ -76,7 +76,7 @@ public void LogoutCPNeg() throws InterruptedException {
         button.click();
         Thread.sleep(1000);
         //click the Log In button in modal
-        driver.findElement(By.xpath("/html/body/am-modal/div/div/div/div[3]/div/div[2]/div/p/am-button/a")).click();
+        driver.findElement(By.xpath("/html/body/am-modal/div/div/div/div[3]/button-list/div/div[2]/div/p/am-button")).click();
         Thread.sleep(1000);
         return driver.getCurrentUrl().contains(type);
         
