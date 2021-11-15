@@ -86,7 +86,7 @@ public void LogoutCPAlt() throws InterruptedException {
         button.click();
         Thread.sleep(1000);
         //click the Log In button in modal
-        driver.findElement(By.xpath("/html/body/am-modal/div/div/div/div[3]/div/div[2]/div/p/am-button/a")).click();
+        driver.findElement(By.xpath("/html/body/am-modal/div/div/div/div[3]/button-list/div/div[2]/div/p/am-button")).click();
         Thread.sleep(1000);
         return driver.getCurrentUrl().contains(type);
         
@@ -143,12 +143,12 @@ public void LogoutCPAlt() throws InterruptedException {
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(pass);
         driver.findElement(By.xpath("//*[@id=\"submitForm\"]")).click();
  
-        Thread.sleep(4000);
+        Thread.sleep(8000);
         // Choose the org acount and click continue
         driver.findElement(By.xpath("/html/body/am-picker/div/div/div/am-item-manipulator/picker-account-data/div/div[2]/div/div[1]/table/tbody[1]/tr/td[2]/picker-entry-icon/i")).click();
         driver.findElement(By.xpath("/html/body/am-picker/div/div/div/am-item-manipulator/picker-account-data/div/div[2]/div/div[2]/am-button[2]/a")).click();
         Thread.sleep(4000);
-        return Utils.getCPPositionsHeaderAlt(driver).getText().contains(type);
+        return Utils.getCPPositionsHeader(driver).getText().contains(type);
         
    }
     
@@ -329,14 +329,14 @@ public void LogoutCPAlt() throws InterruptedException {
 		test = report.startTest(nameofCurrMethod);
 		//ONE
 		DepositSelection("United Kingdom", "United States Dollar (USD)");
-        if(OptionsChecker(Utils.getChoice1(driver), "ACH" ) == false){
+        if(OptionsChecker(Utils.getChoice2(driver), "ACH" ) == false){
             System.out.println("ACH is missing");
             test.log(LogStatus.FAIL, "ACH is missing");
         }
         else {
             //TWO
         	DepositSelection("United Kingdom", "United States Dollar (USD)");
-        	if(OptionsChecker(Utils.getChoice2(driver), "WIRE_NOTIFICATION" ) == false){
+        	if(OptionsChecker(Utils.getChoice1(driver), "WIRE_NOTIFICATION" ) == false){
                 System.out.println("WIRE_NOTIFICATION is missing");
                 test.log(LogStatus.FAIL, "WIRE_NOTIFICATION is missing");
             }
@@ -440,14 +440,14 @@ public void LogoutCPAlt() throws InterruptedException {
 		test = report.startTest(nameofCurrMethod);
 		//ONE
 		DepositSelection("Canada", "Canadian Dollar (CAD)");
-        if(OptionsChecker(Utils.getChoice1(driver), "EFT" ) == false){
+        if(OptionsChecker(Utils.getChoice2(driver), "EFT" ) == false){
             System.out.println("EFT is missing");
             test.log(LogStatus.FAIL, "EFT is missing");
         }
         else {
             //TWO
         	DepositSelection("Canada", "Canadian Dollar (CAD)");
-        	if(OptionsChecker(Utils.getChoice2(driver), "WIRE_NOTIFICATION" ) == false){
+        	if(OptionsChecker(Utils.getChoice1(driver), "WIRE_NOTIFICATION" ) == false){
                 System.out.println("WIRE_NOTIFICATION is missing");
                 test.log(LogStatus.FAIL, "WIRE_NOTIFICATION is missing");
             }
@@ -485,14 +485,14 @@ public void LogoutCPAlt() throws InterruptedException {
 		test = report.startTest(nameofCurrMethod);
 		//ONE
 		DepositSelection("Canada", "United States Dollar (USD)");
-        if(OptionsChecker(Utils.getChoice1(driver), "EFT" ) == false){
+        if(OptionsChecker(Utils.getChoice2(driver), "EFT" ) == false){
             System.out.println("EFT is missing");
             test.log(LogStatus.FAIL, "EFT is missing");
         }
         else {
             //TWO
         	DepositSelection("Canada", "United States Dollar (USD)");
-        	if(OptionsChecker(Utils.getChoice2(driver), "WIRE_NOTIFICATION" ) == false){
+        	if(OptionsChecker(Utils.getChoice1(driver), "WIRE_NOTIFICATION" ) == false){
                 System.out.println("WIRE_NOTIFICATION is missing");
                 test.log(LogStatus.FAIL, "WIRE_NOTIFICATION is missing");
             }
@@ -1243,7 +1243,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("United States", "United States Dollar (USD)");
 		//Choose Method and login
-				if(OptionsLoginValue(Utils.getChoice1(driver), "Electronic / Direct Transfer Deposit", "fancy0008", "tester12" ) == false){
+				if(OptionsLoginValue(Utils.getChoice1(driver), "Direct ACH Transfer from your Bank Deposit", "fancy0008", "tester12" ) == false){
 		            System.out.println("Direct Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "Direct Deposit redirect is not working");
 		            Thread.sleep(3000);
@@ -1381,7 +1381,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("Canada", "Canadian Dollar (CAD)");
 		//Choose Method and login
-				if(OptionsLoginValueMultAccount(Utils.getChoice2(driver), "Transfer Funds", "fdcan514", "canada22" ) == false){
+				if(OptionsLoginValueMultAccount(Utils.getChoice2(driver), "Connect Your Bank via EFT Deposit", "fdcan514", "canada22" ) == false){
 		            System.out.println("EFT Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "EFT redirect is not working");
 		            Thread.sleep(3000);
@@ -1404,7 +1404,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("Japan", "Japanese Yen (JPY)");
 		//Choose Method and login
-				if(OptionsLoginValueAlt(Utils.getChoiceSingle(driver), "Bank Wire Deposit", "fancy1005", "tester12" ) == false){
+				if(OptionsLoginValue(Utils.getChoiceSingle(driver), "Bank Wire Deposit", "fancy1005", "tester12" ) == false){
 		            System.out.println("Zengin Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "Zengin redirect is not working");
 		            Thread.sleep(3000);
@@ -1427,7 +1427,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("United States", "Australian Dollar (AUD)");
 		//Choose Method and login
-				if(OptionsLoginValueAlt(Utils.getChoice2(driver), "Online BPAY Deposit", "fancy1005", "tester12" ) == false){
+				if(OptionsLoginValue(Utils.getChoice2(driver), "Online BPAY Deposit", "fancy1005", "tester12" ) == false){
 		            System.out.println("BPay Deposit redirect is not working");
 		            test.log(LogStatus.FAIL, "BPay redirect is not working");
 		            Thread.sleep(3000);
@@ -1703,7 +1703,7 @@ public void LogoutCPAlt() throws InterruptedException {
 		//ONE
 		DepositSelection("United States", "United States Dollar (USD)");
 		//Choose Method and login
-				if(OptionsLoginValueAlt(Utils.getChoice1(driver), "Deposit", "fancy1005", "tester12" ) == false){
+				if(OptionsLoginValueAlt(Utils.getChoice1(driver), "Deposit", "fancy0011", "tester12" ) == false){
 		            System.out.println("Direct Deposit redirect allowed an invalid account");
 		            test.log(LogStatus.FAIL, "Direct Deposit redirect allowed an invalid account");
 		            Thread.sleep(3000);
